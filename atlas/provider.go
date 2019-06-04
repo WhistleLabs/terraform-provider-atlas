@@ -4,6 +4,7 @@ import (
 	"github.com/hashicorp/atlas-go/v1"
 	"github.com/hashicorp/terraform/helper/schema"
 	"github.com/hashicorp/terraform/terraform"
+ 	"github.com/hashicorp/terraform/version"
 )
 
 const (
@@ -52,7 +53,7 @@ func providerConfigure(d *schema.ResourceData) (interface{}, error) {
 			return nil, err
 		}
 	}
-	client.DefaultHeader.Set(terraform.VersionHeader, terraform.VersionString())
+	client.DefaultHeader.Set(version.Header, version.Version)
 	client.Token = d.Get("token").(string)
 
 	return client, nil
